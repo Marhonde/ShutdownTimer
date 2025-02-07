@@ -8,4 +8,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+    </PropertyGroup>
+    
 </Project>

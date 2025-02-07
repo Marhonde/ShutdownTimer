@@ -38,7 +38,8 @@ partial class Form1
         ClientSize = new System.Drawing.Size(402, 505);
         FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
         ShowIcon = false;
-        Text = "Таймер выключения";
+        StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+        Text = "Таймер гибернации";
         ResumeLayout(false);
     }
 
