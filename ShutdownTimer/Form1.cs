@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Diagnostics;
+using System.Resources;
 
 namespace ShutdownTimer;
 
@@ -14,10 +15,12 @@ public partial class Form1 : Form
     public Form1()
     {
         InitializeComponent();
+        var rm = new ResourceManager("ShutdownTimer.Resources.localization.String", typeof(Form1).Assembly);
+        
         var label = new Label
         {
             Location = new Point(10, 20),
-            Text = "Время, через которое компьютер уйдет в гибернацию",
+            Text = rm.GetString("label", CultureInfo.CurrentUICulture),
             Font = new Font("Arial", 10.0f),
             Width = ClientSize.Width - 20,
             Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
@@ -29,7 +32,7 @@ public partial class Form1 : Form
             Width = ClientSize.Width - 20,
             Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
             Font = new Font("Arial", 16.0f),
-            PlaceholderText = "Секунды (По умолчанию 0)"
+            PlaceholderText = rm.GetString("defaultSeconds", CultureInfo.CurrentUICulture)
         };
 
         var label1 = new Label
@@ -38,7 +41,7 @@ public partial class Form1 : Form
             Width = ClientSize.Width - 20,
             Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
             Font = new Font("Arial", 12.0f),
-            Text = "Выберите единицу измерения"
+            Text = rm.GetString("unit", CultureInfo.CurrentUICulture)
         };
         
         var panel = new Panel
@@ -51,7 +54,7 @@ public partial class Form1 : Form
 
         var sec = new Button
         {
-            Text = "Секунды",
+            Text = rm.GetString("seconds", CultureInfo.CurrentUICulture),
             Width = panel.Width / 3 - 5,
             Height = 30,
             Location = new Point(5, 5),
@@ -61,7 +64,7 @@ public partial class Form1 : Form
         
         var minutes = new Button
         {
-            Text = "Минуты",
+            Text = rm.GetString("minutes", CultureInfo.CurrentUICulture),
             Width = panel.Width / 3 - 5,
             Height = 30,
             Location = new Point(panel.Width / 2 - (panel.Width / 3 - 5) / 2, 5),
@@ -71,7 +74,7 @@ public partial class Form1 : Form
         
         var hours = new Button
         {
-            Text = "Часы",
+            Text = rm.GetString("hours", CultureInfo.CurrentUICulture),
             Width = panel.Width / 3 - 5,
             Height = 30,
             Location = new Point(2 * (panel.Width / 3), 5),
@@ -84,7 +87,7 @@ public partial class Form1 : Form
             Location = new Point(ClientSize.Width / 2 - hours.Width / 2, 249),
             Width = hours.Width,
             Height = 40,
-            Text = "Запустить",
+            Text = rm.GetString("start", CultureInfo.CurrentUICulture),
             Font = new Font("Arial", 12.0f, FontStyle.Bold),
         };
         
@@ -120,7 +123,7 @@ public partial class Form1 : Form
         {
             _seconds = Math.Round(_seconds = _clock switch
             {
-                0 when _textBox.Text == "" => 0,
+                0 or 1 or 2 when string.IsNullOrWhiteSpace(_textBox.Text) => 0,
                 0 when _textBox.Text != "" => double.Parse(_textBox.Text),
                 1 => double.Parse(_textBox.Text) * 60,
                 2 => double.Parse(_textBox.Text) * 3600,
@@ -170,18 +173,6 @@ public partial class Form1 : Form
             2 => value * 3600,
             _ => _seconds
         };
-    
-        var newValue = param switch
-        {
-            0 => _seconds,
-            1 => _seconds / 60,
-            2 => _seconds / 3600,
-            _ => _seconds
-        };
-    
-        _textBox.Text = newValue.ToString(CultureInfo.CurrentCulture);
-    
-        ChangePlaceholder(_textBox, param);
         
         _clock = param;
     }

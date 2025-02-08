@@ -9,7 +9,31 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+        <ApplicationIcon>Resources\ico\icon.ico</ApplicationIcon>
     </PropertyGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\localization\String.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>String.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\localization\String.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>String.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\localization\String.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>String.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\localization\String.en.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>String.en.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
     
 </Project>
