@@ -46,4 +46,7 @@
     <data name="start" xml:space="preserve">
         <value>Start</value>
     </data>
+    <data name="timeToOff" xml:space="preserve">
+        <value>The computer will enter the hibernation state after {0} seconds</value>
+    </data>
 </root>

@@ -17,6 +17,7 @@ public partial class Form1 : Form
         InitializeComponent();
         var rm = new ResourceManager("ShutdownTimer.Resources.localization.String", typeof(Form1).Assembly);
         
+        
         var label = new Label
         {
             Location = new Point(10, 20),
@@ -129,20 +130,13 @@ public partial class Form1 : Form
                 2 => double.Parse(_textBox.Text) * 3600,
                 _ => _seconds
             }, 0);
-
-            var request = $"timeout /t {_seconds} /nobreak\ncd c:\\\nshutdown /h";
-
-            const string path = "Shutdown.bat";
             
-            File.WriteAllText(path, request);
+            var shutdown = new Shutdown(_seconds);
 
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = path,
-                UseShellExecute = true,
-            });
+            shutdown.Show();
+            shutdown.Owner = this;
             
-            Close();
+            Hide();
         };
         
         Controls.Add(btn);

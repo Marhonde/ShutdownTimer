@@ -46,4 +46,7 @@
     <data name="start" xml:space="preserve">
         <value>Запустить</value>
     </data>
+    <data name="timeToOff" xml:space="preserve">
+        <value>Компьютер уйдет в состояние гибернации через {0} секунд</value>
+    </data>
 </root>

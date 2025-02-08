@@ -132,6 +132,15 @@ namespace ShutdownTimer.Resources.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Запустить.
+        /// </summary>
+        internal static string timeToOff {
+            get {
+                return ResourceManager.GetString("timeToOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выберите единицу измерения.
         /// </summary>
         internal static string unit {
