@@ -41,6 +41,7 @@ partial class Shutdown
         FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
         StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         Text = "Таймер гибернации";
+        FormClosed += Shutdown_FormClosed;
         ResumeLayout(false);
     }
 

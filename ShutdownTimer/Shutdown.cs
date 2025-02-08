@@ -4,6 +4,8 @@ namespace ShutdownTimer;
 
 public partial class Shutdown : Form
 {
+    private CancellationTokenSource _cts = new();
+    
     public Shutdown(double seconds)
     {
         InitializeComponent();
@@ -24,13 +26,27 @@ public partial class Shutdown : Form
 
     private async void StartCountdown(Label label, double seconds)
     {
-            for (var i = seconds; i >= 0 ; i--)
+        try
+        {
+            for (var i = (int)seconds; i >= 0; i--)
             {
-                await Task.Delay(1000);
+                await Task.Delay(1000, _cts.Token);
                 label.Text = string.Format(Resources.localization.String.timeToOff, i - 1);
             }
 
             Process.Start("shutdown", "/h");
             Owner?.Close();
+        }
+        catch (TaskCanceledException)
+        {
+            //
+        }
+    }
+
+    private void Shutdown_FormClosed(object sender, FormClosedEventArgs e)
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+        Owner?.Show();
     }
 }
