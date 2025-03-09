@@ -37,7 +37,7 @@ partial class Shutdown
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(549, 261);
+        ClientSize = new System.Drawing.Size(589, 161);
         FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
         StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         Text = "Таймер гибернации";
